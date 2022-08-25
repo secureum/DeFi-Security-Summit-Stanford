@@ -3,7 +3,8 @@
 
 ![A-MAZE-X-Stanford-LOGO](https://github.com/eugenioclrc/DeFi-Security-Summit-Stanford/blob/master/img/A-MAZE-X-Stanford.png)
 *hosted by the Stanford University as part of **[Defi Security 101](https://defisecuritysummit.org/defi-security-101/)***\
-*built by [eugenioclrc](https://github.com/eugenioclrc) and [luksgrin](https://github.com/luksgrin)*
+*built by [eugenioclrc](https://github.com/eugenioclrc) and [luksgrin](https://github.com/luksgrin)*\
+*special thanks to [patrickd](https://github.com/patrickd-), [StErMi](https://github.com/StErMi), [tinchoabbate](https://github.com/tinchoabbate) and [Rajeev](https://twitter.com/0xrajeev) for reviewing, commenting and helping during the elaboration and design of this CTF Workshop*
 
 -----------------------------
 
