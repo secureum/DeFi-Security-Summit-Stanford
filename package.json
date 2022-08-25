@@ -1,0 +1,18 @@
+{
+  "name": "secureum_amazex_stanford",
+  "version": "1.0.0",
+  "description": "Hardhat flavor for Secureum's A-MAZE-X CTF challenge held in Stanford as part of the DeFi Security 101 event on the 26th of August 2022",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "luksgrin,eugenioclrc",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3",
+    "hardhat": "^2.10.2"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^1.0.2"
+  }
+}
