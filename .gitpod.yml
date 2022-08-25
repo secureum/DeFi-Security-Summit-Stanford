@@ -1,0 +1,7 @@
+
+image:
+  file: .gitpod.Dockerfile
+tasks:
+  - name: ⚒️ HARDHAT & DEPENDENCIES INSTALLATION ⚒️
+    command: |
+      npm i
