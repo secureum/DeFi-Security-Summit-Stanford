@@ -50,3 +50,7 @@ Focus on **learning** and having **fun**! 😊
 ------------------------------
 
 🔗 [Access the repository's main `README` file containing the challenges' descriptions](https://github.com/eugenioclrc/DeFi-Security-Summit-Stanford/tree/master/).
+
+## Solution
+
+🔗 [Access this flavor's solution implementation](https://github.com/eugenioclrc/DeFi-Security-Summit-Stanford/tree/tenderlySandbox-solved).
