@@ -179,6 +179,6 @@ Will you be able to **drain** all the **$ISEC** from `BorrowSystemInsecureOracle
 
 ## CTF Writeup 🗒️🗒️🗒️
 
-Follow [this link](htpps://ventral.digital/posts/2022/8/27/secureum-a-maze-x-stanford-ctf) to access this CTF's writeup by [patrickd](https://github.com/patrickd-).
+Follow [this link](https://ventral.digital/posts/2022/8/27/secureum-a-maze-x-stanford-ctf) to access this CTF's writeup by [patrickd](https://github.com/patrickd-).
 
 -----------
