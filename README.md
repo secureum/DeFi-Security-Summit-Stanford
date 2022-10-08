@@ -181,4 +181,6 @@ Will you be able to **drain** all the **$ISEC** from `BorrowSystemInsecureOracle
 
 Follow [this link](https://ventral.digital/posts/2022/8/27/secureum-a-maze-x-stanford-ctf) to access this CTF's writeup by [patrickd](https://github.com/patrickd-).
 
+Follow [this link](https://medium.com/@mattaereal/a-maze-x-ctf-walkthrough-part-0-d73338e6809) for a more detailed walk-through for each challenge by [Matías Aereal Aeón](twitter.com/mattaereal).
+
 -----------
