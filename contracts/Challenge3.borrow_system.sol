@@ -86,7 +86,7 @@ contract BorrowSystemInsecureOracle {
 
 		uint256 collateralValue = token0Deposited[user] + (token1Deposited[user] * _tokenPrice) / _base;
 		
-		uint256 maxBorrow = collateralValue * 100 / 90; // 90% LTV
+		uint256 maxBorrow = collateralValue * 90 / 100; // 90% LTV
 		uint256 borrowed = token0Borrowed[user] + (token1Borrowed[user] * _tokenPrice) / _base;
 
 		return maxBorrow >= borrowed;
