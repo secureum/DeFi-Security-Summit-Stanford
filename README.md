@@ -183,4 +183,6 @@ Follow [this link](https://ventral.digital/posts/2022/8/27/secureum-a-maze-x-sta
 
 Follow [this link](https://medium.com/@mattaereal/a-maze-x-ctf-walkthrough-part-0-d73338e6809) for a more detailed walk-through for each challenge by [Matías Aereal Aeón](twitter.com/mattaereal).
 
+Follow [this link](https://github.com/faucet0x9a54/Blockchain/tree/master/ChallengesCTF/A-maze-x) for another writeup using contracts in hardhat by [faucet0x9a54](twitter.com/faucet0x9a54).
+
 -----------
